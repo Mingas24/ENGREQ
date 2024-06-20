@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+             style="background-image: url('assets/img/bga.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h2 class="title">Pedido de Instalação</h2>
+            </div>          
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2>Pedido</h2>
+                        <div class="separator separator-primary"></div>
+                        <h4>Apiário</h4>
+                    <div ngbDropdown class="dropdown" placement="bottom">
+                        <button class="btn btn-default dropdown-toggle" id="dropdownBasic1"
+                                ngbDropdownToggle>{{ selectedValue }}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button *ngFor="let value of apiarios" ngbDropdownItem
+                                    (click)="onValueSelectFirstDropdown(value)">{{ value }}</button>
+                        </div>
+                    </div>
+                    
+                    <!--Pedido-->
+                    <div *ngIf="showButton">
+                        <div>
+                            <button class="btn btn-primary" (click)="savePedido()">Submeter Pedido</button>
+                        </div>
+                    </div>
+                    <div *ngIf="isSuccess">
+                        <p class="category">Pedido submetido com sucesso!</p>
+                        <div class="separator separator-primary"></div>
+                    </div>
+                    <h2 class="title">Lista de Pedidos</h2>
+                    <table id="pedidosInstalacao">
+                        <tr>
+                            <th>Apiário ID</th>
+                            <th>Autorizado</th>
+                            <th>Observações</th>
+                        </tr>
+                        <tr *ngFor="let info of pedidosInstalacao">
+                            <td>{{info.apiarioId}}</td>
+                            <td>{{info.autorizado}}</td>
+                            <td>{{info.observacoes}}</td>
+                        </tr>   
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

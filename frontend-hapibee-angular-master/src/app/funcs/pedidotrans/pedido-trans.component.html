@@ -1,0 +1,76 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+             style="background-image: url('assets/img/bga.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h2 class="title">Pedido de Transumância</h2>
+            </div>
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h4>Apiário</h4>
+                    <div ngbDropdown class="dropdown" placement="bottom">
+                        <button class="btn btn-default dropdown-toggle" id="dropdownBasic1"
+                                ngbDropdownToggle>{{ selectedValue }}
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button *ngFor="let value of apiarios" ngbDropdownItem
+                                    (click)="onValueSelectFirstDropdown(value)">{{ value }}
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="showNewBox">
+                        <form (ngSubmit)="submitPedidoTrans()" #colmeiaForm="ngForm">
+                            <input type="text" class="form-control" id="latitude"
+                                   [(ngModel)]="latitude" placeholder="Latitude">
+                            <input type="text" class="form-control" id="Longitude"
+                                   [(ngModel)]="longitude" placeholder="Longitude">
+                            <input type="text" class="form-control" id="Freguesia"
+                                   [(ngModel)]="freguesia" placeholder="Freguesia">
+                            <button class="btn btn-primary btn-round" [disabled]="colmeiaForm.invalid">Submeter</button>
+                        </form>
+                        <div *ngIf="isSuccess">
+                            <p class="category">Sucesso!</p>
+                            <div class="separator separator-primary"></div>
+                        </div>
+
+
+                    </div>
+
+                    <h2 class="title">Histórico de Pedidos de Transumância</h2>
+                    <table id="pedidos">
+                        <tr>
+                            <th>Apiario ID</th>
+                            <th>Aprovado ?</th>
+                            <th>Nova Freguesia - Latitude;Longitude</th>
+                        </tr>
+                        <tr *ngFor="let info of pedidos">
+                            <td>{{ info.apiarioId }}</td>
+                            <td>{{ info.aprovado }}</td>
+                            <td>{{ info.localizacaoDTO.freg}} - {{ info.localizacaoDTO.lat}};{{ info.localizacaoDTO.longi}}</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+                <!--Lista de inspeções-->
+
+                <!--Detalhes inspeção-->
+
+                <!--Editar inspeção-->
+
+
+                <!--Nova inspeção-->
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,78 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+             style="background-image: url('assets/img/bga.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Declaração Anual</h1>
+            </div>
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">Realizar Declaração Anual</h2>
+                    <div class="separator separator-primary"></div>
+                    <p class="category">Campos da Declaração Anual</p>
+                    <input type="text" class="form-control" id="apicultorNIF"
+                           [(ngModel)]="apicultorNIF"
+                           placeholder="NIF do Apicultor (Através do NIF será selecionada automaticante a informação)">
+                    <input type="text" class="form-control" id="apicultorCodigoResidencia"
+                           [(ngModel)]="apicultorCodigoResidencia" placeholder="Código de Residência">
+                    <input type="text" class="form-control" id="apicultorCodigoFreguesia"
+                           [(ngModel)]="apicultorCodigoFreguesia" placeholder="Código da Freguesia">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="apicultorCulturaIntensiva">
+                            <span class="form-check-sign"></span>
+                            Cultura Intensiva
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="transumancia">
+                            <span class="form-check-sign"></span>
+                            Transumância
+                        </label>
+                    </div>
+                    <input type="text" class="form-control" id="registoInicioAtividade"
+                           [(ngModel)]="registoInicioAtividade" placeholder="Registo do Início da Atividade">
+                    <input type="text" class="form-control" id="fechoAtividade"
+                           [(ngModel)]="fechoAtividade" placeholder="Registo do Fecho de Atividade">
+                    <input type="text" class="form-control" id="pedidoAlteracao"
+                           [(ngModel)]="pedidoAlteracao" placeholder="Pedido de Alteração">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="zonaControlada">
+                            <span class="form-check-sign"></span>
+                            Zona Controlada
+                        </label>
+                    </div>
+                    <div class="separator separator-primary"></div>
+                    <button class="btn btn-primary btn-round" (click)="submitDeclaracaoAnual()">Submit</button>
+                    <div *ngIf="isSuccess">
+                        <p class="category">Sucesso!</p>
+                        <div class="separator separator-primary"></div>
+                    </div>
+                    <h2 class="title">Histórico de Declarações Realizadas</h2>
+                    <table id="declaracoes">
+                        <tr>
+                            <th>NIF</th>
+                            <th>Inicio de Atividade</th>
+                            <th>Fecho de Atividade</th>
+                            <th>Estado</th>
+                        </tr>
+                        <tr *ngFor="let info of declaracoes">
+                            <td>{{ info.apicultorNIF }}</td>
+                            <td>{{ info.registoInicioAtividade | date:'MM-dd-yyyy' }}</td>
+                            <td>{{ info.fechoAtividade | date:'MM-dd-yyyy' }}</td>
+                            <td>{{ info.aprovacao }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

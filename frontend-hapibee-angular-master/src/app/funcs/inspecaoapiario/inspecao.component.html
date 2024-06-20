@@ -1,0 +1,110 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+             style="background-image: url('assets/img/bga.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h2 class="title">Inspeção de Apiários</h2>
+            </div>          
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h4>Apiário</h4>
+                    <div ngbDropdown class="dropdown" placement="bottom">
+                        <button class="btn btn-default dropdown-toggle" id="dropdownBasic1"
+                                ngbDropdownToggle>{{ selectedValue }}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button *ngFor="let value of apiarios" ngbDropdownItem
+                                    (click)="onValueSelectFirstDropdown(value)">{{ value }}</button>
+                        </div>
+                    </div>
+                    <div class="separator separator-primary"></div>
+                    <div *ngIf="showButtons">
+                        <div>
+                            <a class="btn btn-primary btn-round" (click)="listaInspecoes()">Lista de Inspeções</a> | <button class="btn btn-primary btn-round" (click)="newInspecao()">Nova Inspeção</button>
+                        </div>
+                    </div> 
+                    <!--Lista de inspeções-->
+                    <div *ngIf="showListInspecoes">
+                        <h2>Lista de Inspeções</h2>
+                        <div style="text-align: right;">
+                            <a style="align-items:end;" class="btn btn-default" (click)="newInspecao()">Nova Inspeção</a>
+                        </div>
+                        <table id="inspecoes">
+                            <tr>
+                                <th>Data&Hora</th>
+                                <th>Produção de Mel?</th>
+                                <th>Opções</th>
+                            </tr>
+                            <tr *ngFor="let info of inspecoes">
+                                <td>{{info.dataHora}}</td>
+                                <td>{{info.producaoMel}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="detalhesInspecao(info.id)">Detalhes</a> | 
+                                    <a href="javascript:void(0)" (click)="editarInspecao(info.id)">Editar</a> |
+                                    <a href="javascript:void(0)" (click)="apagaInspecao(info.id)">Apagar</a>
+                                </td>
+                            </tr>                                
+                        </table>                        
+                    </div>
+                    <!--Detalhes inspeção-->
+                    <div *ngIf="showDetailsInspecao">
+                        <h2>Detalhes Inspeção</h2>
+                        <div *ngIf="inspecao">
+                            <p><b>ID:</b> {{inspecao.id}}</p>
+                            <b>Data e Hora</b><input type="text" class="form-control" align="text-center" [(ngModel)]="inspecao.dataHora" disabled>
+                            <b>Condições Metereologicas</b><input type="text" class="form-control" [(ngModel)]="inspecao.condicoesMetereologicas" disabled>
+                            <b>Controle de Pragas/Doencas</b><textarea class="form-control" [(ngModel)]="inspecao.controlePragasDoencas" disabled></textarea>
+                            <b>Doença a participar?</b><input type="checkbox" class="form-control" [(ngModel)]="inspecao.participarDoenca" disabled>
+                            <b>Produção de Mel?</b><input type="checkbox" class="form-control" [(ngModel)]="inspecao.producaoMel" disabled>
+                            <b>Estado dos Quadros</b><textarea class="form-control" [(ngModel)]="inspecao.estadoQuadros" disabled></textarea>
+                            <b>Comportamento Rainha</b><textarea class="form-control" [(ngModel)]="inspecao.comportamentoRainha" disabled></textarea>
+                            <b>Alimentação</b><textarea class="form-control" [(ngModel)]="inspecao.alimentacao" disabled></textarea>
+                            <b>Observações Gerais</b><textarea class="form-control" [(ngModel)]="inspecao.observacoesGerais" disabled></textarea>
+                            <a class="btn btn-default" (click)="listaInspecoes()">Voltar</a> | <button class="btn btn-primary" (click)="apagaInspecao(inspecao.id)">Apagar</button>
+                        </div>
+                    </div>
+                    <!--Editar inspeção-->
+                    <div *ngIf="showEditInspecao">
+                        <div *ngIf="inspecao">
+                            <h2>Inspeção {{inspecao.id}}</h2>
+                            <b>Data e Hora</b><input type="text" class="form-control" align="text-center" [(ngModel)]="inspecao.dataHora">
+                            <b>Condições Metereologicas</b><input type="text" class="form-control" [(ngModel)]="inspecao.condicoesMetereologicas">
+                            <b>Controle de Pragas/Doencas</b><textarea class="form-control" [(ngModel)]="inspecao.controlePragasDoencas"></textarea>
+                            <b>Doença a participar?</b><input type="checkbox" class="form-control" [(ngModel)]="inspecao.participarDoenca">
+                            <b>Produção de Mel?</b><input type="checkbox" class="form-control" [(ngModel)]="inspecao.producaoMel">
+                            <b>Estado dos Quadros</b><textarea class="form-control" [(ngModel)]="inspecao.estadoQuadros"></textarea>
+                            <b>Comportamento Rainha</b><textarea class="form-control" [(ngModel)]="inspecao.comportamentoRainha"></textarea>
+                            <b>Alimentação</b><textarea class="form-control" [(ngModel)]="inspecao.alimentacao"></textarea>
+                            <b>Observações Gerais</b><textarea class="form-control" [(ngModel)]="inspecao.observacoesGerais"></textarea>
+                            <a class="btn btn-default" (click)="listaInspecoes()">Voltar</a> | <button class="btn btn-primary" (click)="saveInspecao(inspecao.id)">Guardar</button>
+                        </div>
+                    </div>
+
+                    <!--Nova inspeção-->
+                    <div *ngIf="showNewInspecao">
+                        <div *ngIf="novaInspecao">
+                            <h2>Nova Inspeção</h2>
+                            <b>Data e Hora</b><input type="text" class="form-control" align="text-center" id="dataHora" [(ngModel)]="novaInspecao.dataHora">
+                            <b>Condições Metereologicas</b><input type="text" class="form-control" [(ngModel)]="novaInspecao.condicoesMetereologicas">
+                            <b>Controle de Pragas/Doencas</b><textarea class="form-control" [(ngModel)]="novaInspecao.controlePragasDoencas"></textarea>
+                            <b>Doença a participar?</b><input type="checkbox" class="form-control" [(ngModel)]="novaInspecao.participarDoenca">
+                            <b>Produção de Mel?</b><input type="checkbox" class="form-control" [(ngModel)]="novaInspecao.producaoMel">
+                            <b>Estado dos Quadros</b><textarea class="form-control" [(ngModel)]="novaInspecao.estadoQuadros"></textarea>
+                            <b>Comportamento Rainha</b><textarea class="form-control" [(ngModel)]="novaInspecao.comportamentoRainha"></textarea>
+                            <b>Alimentação</b><textarea class="form-control" [(ngModel)]="novaInspecao.alimentacao"></textarea>
+                            <b>Observações Gerais</b><textarea class="form-control" [(ngModel)]="novaInspecao.observacoesGerais"></textarea>
+                            <a class="btn btn-default" (click)="listaInspecoes()">Voltar</a> | <button class="btn btn-primary" (click)="saveInspecao(0)">Guardar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

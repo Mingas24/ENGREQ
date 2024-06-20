@@ -1,0 +1,74 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+             style="background-image: url('assets/img/bga.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Cresta</h1>
+            </div>
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+
+                    <h2 class="title">Realizar Cresta</h2>
+
+                    <div ngbDropdown class="dropdown" placement="bottom">
+                        <button class="btn btn-default dropdown-toggle" id="dropdownBasic1"
+                                ngbDropdownToggle>{{ selectedValue }}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button *ngFor="let value of values" ngbDropdownItem
+                                    (click)="onValueSelectFirstDropdown(value)">{{ value }}</button>
+                        </div>
+                    </div>
+                    <div *ngIf="showNewDropdown">
+                        <div ngbDropdown class="dropdown" placement="bottom">
+                            <button class="btn btn-default dropdown-toggle" id="dropdownBasic2" ngbDropdownToggle>
+                                {{ selectedValue2 }}
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                <button *ngFor="let value of valuesC" ngbDropdownItem
+                                        (click)="onValueSelectSecondDropdown(value)">{{ value }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator separator-primary"></div>
+                    <div *ngIf="showBoxes">
+                        <div *ngFor="let info of alcas; let i = index">
+                            <p class="category">Alca {{info.id}}</p>
+                            <input type="text" class="form-control" id="additionalInfo1{{i}}"
+                                   [(ngModel)]="info.quantidadeMel" placeholder="Quantidade de Mel">
+                            <input type="text" class="form-control" id="additionalInfo2{{i}}"
+                                   [(ngModel)]="info.quantidadePolen" placeholder="Quantidade de Polen">
+                            <div class="separator separator-primary"></div>
+                        </div>
+                        <button class="btn btn-primary btn-round" (click)="submitCresta()">Submeter</button>
+                        <div *ngIf="isSuccess">
+                            <p class="category">Sucesso!</p>
+                            <div class="separator separator-primary"></div>
+                        </div>
+                    </div>
+                    <h2 class="title">Histórico de Crestas Realizadas</h2>
+                    <table id="crestas">
+                        <tr>
+                            <th>ID</th>
+                            <th>Colmeia</th>
+                            <th>Data</th>
+                        </tr>
+                        <tr *ngFor="let info of crestas">
+                            <td>{{info.id}}</td>
+                            <td>{{info.colmeia.id}}</td>
+                            <td>{{info.data | date:'dd-MM-yyyy'}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

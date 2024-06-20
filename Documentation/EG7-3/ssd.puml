@@ -1,0 +1,27 @@
+@startuml
+autonumber
+
+actor "Apicultor" as USER
+participant "Sistema" as SYSTEM
+
+activate USER
+
+USER -> SYSTEM: O apicultor regista o início da cresta
+
+activate SYSTEM
+
+SYSTEM --> USER: O sistema solicita os dados da recolha das alças e meias alças
+
+deactivate SYSTEM
+
+USER -> SYSTEM: O apicultor introduz os dados solicitados
+
+activate SYSTEM
+
+SYSTEM --> USER: O sistema valida os dados e informa acerca do sucesso da operação
+
+deactivate SYSTEM
+
+deactivate USER
+
+@enduml

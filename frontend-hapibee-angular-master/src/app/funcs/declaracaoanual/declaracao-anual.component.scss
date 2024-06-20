@@ -1,0 +1,22 @@
+#declaracoes {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#declaracoes td, #declaracoes th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#declaracoes tr:nth-child(even){background-color: #f2f2f2;}
+
+#declaracoes tr:hover {background-color: #ddd;}
+
+#declaracoes th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #f96332;
+  color: white;
+}
